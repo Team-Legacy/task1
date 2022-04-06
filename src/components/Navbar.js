@@ -38,6 +38,7 @@ export default function Navbar() {
         w="full"
         px={{ base: 2, sm: 4 }}
         py={4}
+        // mb={10}
       >
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
           <Flex>
@@ -46,10 +47,11 @@ export default function Navbar() {
               title="Navbar"
               display="flex"
               alignItems="center"
+              fontSize='16px'
             >
               <Image src={Logo} h="30px"/>
               <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-                One Click
+                LEGAC
               </chakra.h1>
             </chakra.a>
           </Flex>

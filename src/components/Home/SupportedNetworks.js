@@ -16,7 +16,8 @@ export default function SupportedNetworks() {
             py={{base: "20", sm: "0"}}
             spacing={4}
             justify={'center'}
-            align={'center'}>
+            align={'center'}
+            mt="4">
             <chakra.p
                 fontSize="xl"
                 lineHeight="8"

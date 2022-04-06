@@ -79,10 +79,10 @@ export default function LoginButton() {
           */
             : 
             <Button 
-              bg="brand.100" color="white" 
+              bg="green.700" color="white" 
               size="md" onClick={handleLogin}
               _hover={{
-                backgroundColor: "brand.200"
+                backgroundColor: "green.600"
               }}
             >
               Connect Wallet

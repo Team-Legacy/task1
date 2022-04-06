@@ -113,7 +113,7 @@ export default function MainTabs() {
 
     return (
     <>
-    <Center bg={bg} h="90vh">
+    <Center bg={bg} h="90vh" mt="4">
         <Box mt="-20" px="2" pb="4" rounded="xl" shadow="lg" bg={useColorModeValue("white", "gray.700")} w={{base:'90vw', md:"60vw"}} h="80vh">
             <Tabs isFitted variant='unstyled' onChange={(index) => handleTabChange(index)}>
             <Grid templateColumns='repeat(5, 1fr)' gap={4}>
@@ -166,7 +166,8 @@ export default function MainTabs() {
             </Tabs>
             <Center>
                 <Button bg="brand.100" color="white" 
-                size="md"
+                size="lg"
+                my="20px"
                 _hover={{
                     backgroundColor: "brand.200"
                 }}

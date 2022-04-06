@@ -58,17 +58,21 @@ export default function Footer() {
           >
             <Image src={Logo} h="30px"/>
             <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-              One Click
+              LEGAC
             </chakra.h1>
           </chakra.a>
         </Flex>
-        <Text>© 2022 One Click. All rights reserved</Text>
+        <Text>© 2022 LEGAC. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Twitter'} href={'#'}>
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={'YouTube'} href={'#'}>
-            <FaYoutube />
+          <SocialButton label={'YouTube'} href={'#'} _hover={{
+                color: "green.600"
+              }}>
+            <FaYoutube _hover={{
+                color: "green.600"
+              }}/>
           </SocialButton>
           <SocialButton label={'Instagram'} href={'#'}>
             <FaInstagram />
