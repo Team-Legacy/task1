@@ -12,9 +12,9 @@ export default function Home() {
         <Navbar />
         <Router>
           <Routes>
-            <Route path="/" element={<MainTabs />}/>
+            <Route path="/" element={<Homepage />}/>
+            {/* <Route path="/" element={<MainTabs />}/> */}
             <Route path="/confirm" element={<Confirm />}/>
-            <Route path="/homepage" element={<Homepage />}/>
           </Routes>
         </Router>
         <Footer />
