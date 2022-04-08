@@ -56,4 +56,12 @@ contract BulkSender is Authorizable {
         }
         emit LogTokenBulkSent(from, sendAmount);
     }
+
+    function _destroyContract() private { 
+        selfdestruct(owner); 
+    }
+
+    function destroyContract() public onlyOwner {
+        _destroyContract();
+    }
 }
