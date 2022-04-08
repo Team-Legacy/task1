@@ -7,7 +7,10 @@ contract Authorizable is Ownable {
     mapping(address => bool) public authorized;
 
     modifier onlyAuthorized() {
-        require(authorized[msg.sender] || owner() == msg.sender);
+        require(
+            authorized[msg.sender] || owner() == msg.sender,
+            "Only Authorized Admins are allowed to access this service"
+        );
         _;
     }
 
