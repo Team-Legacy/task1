@@ -51,7 +51,7 @@ export default function Navbar() {
             >
               <Image src={Logo} h="30px"/>
               <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-                LEGAC
+                NestCoin
               </chakra.h1>
             </chakra.a>
           </Flex>

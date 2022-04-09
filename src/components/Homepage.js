@@ -55,7 +55,9 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
 
     const changePro = () => {
         setIsPro(!isPro)
+        
     }
+    
 
     const confirm = () => {
         if(!currentAccount) {
@@ -145,7 +147,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
           <Stack spacing={6} w={'full'} maxW={'lg'}>
             <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
               <Text color={'green.400'} as={'span'}>
-              Harness the
+              Harness The
               </Text>{' '}
               <br />{' '}
               <Text
@@ -161,13 +163,14 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                   bg: 'green.400',
                   zIndex: -1,
                 }}>
-                Power of WEB3
+                Power of WEB3.0
               </Text>
               {/* <br />{' '} */}
               
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-            A system that allows users to batch transactions together so they can distribute their "currency" as quickly and efficiently as possible.
+              <h1>Reward Loyal Customer's with NestCoin token.</h1>
+            {/* A system that allows users to batch transactions together so they can distribute their "currency" as quickly and efficiently as possible. */}
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button 
@@ -177,7 +180,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                 backgroundColor: "green.600"
               }}
             >
-                Claim Reward
+              AirDrop
               </Button>
               {/* <Button rounded={'full'} onClick={onOpen}>How It Works</Button> */}
             </Stack>
@@ -200,7 +203,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
             <Box mt="-20" px="2" pb="4" rounded="xl" shadow="lg" bg={useColorModeValue("white", "gray.700")} w={{base:'90vw', md:"60vw"}} h="80vh">
               <Tabs isFitted variant='unstyled' onChange={(index) => handleTabChange(index)}>
               <Grid templateColumns='repeat(5, 1fr)' gap={4}>
-                <GridItem colSpan={4}>
+                <GridItem colSpan={3}>
                     <TabList  mx={4} mt="8" p={2} bg="brand.300" rounded="xl" w={{base:"92.5%", md:"60%"}} color="black">
                     <Tab _selected={{ color: 'black', bg: 'brand.200' }} 
                         _focus={{ outline: "none" }} rounded="lg">
@@ -212,20 +215,16 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                         currentNetwork === 1
                         ? "ETH" : ""}
                     </Tab>
-                    <Tab _selected={{ color: 'black', bg: 'brand.200' }}
+                    {/* <Tab _selected={{ color: 'black', bg: 'brand.200' }}
                         _focus={{ outline: "none" }} rounded="lg">
                         Send Tokens
-                    </Tab>
+                    </Tab> */}
                     </TabList>
                 </GridItem>
                 <GridItem colSpan={1}>
                   <FormControl display='flex' alignItems='flex-end' justifyContent='flex-end' mt="8" pr="4">
-                  <FormLabel htmlFor='pro' mb='0'>
-                      PRO
-                      <Tooltip label='In Pro Mode, you can set different amounts of token to be sent to each address' 
-                      fontSize='sm' rounded="md">
-                          <InfoOutlineIcon ml="2"/>
-                      </Tooltip>
+                  <FormLabel htmlFor='pro' mb='0' >
+                     {/* {"Multi Send":"Single Send"} */}
                   </FormLabel>
                   <Switch id='pro' onChange={changePro}/>
                   </FormControl>
@@ -233,10 +232,11 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
               </Grid>
               <TabPanels>
                 <TabPanel>
-                    { isPro
+                    { !isPro
                     ? <></>
                     : <Amounts />}
                     <Addresses />
+
                 </TabPanel>
                 <TabPanel>
                     <Token />
