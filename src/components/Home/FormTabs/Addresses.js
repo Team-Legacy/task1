@@ -2,11 +2,11 @@ import React from 'react'
 import {
     FormControl, FormLabel, Textarea, Tooltip, Grid, GridItem, Button
 } from '@chakra-ui/react'
-import { InfoOutlineIcon } from '@chakra-ui/icons'
-import { FaFileCsv } from "react-icons/fa"
-import { BsBookmarks } from "react-icons/bs"
-import CSVUpload from './CSVUpload'
-import { useAuth } from 'contexts/AuthContext'
+import { InfoOutlineIcon } from '@chakra-ui/icons';
+import { FaFileCsv } from "react-icons/fa";
+import { BsBookmarks } from "react-icons/bs";
+import CSVUpload from './CSVUpload';
+import { useAuth } from 'contexts/AuthContext';
 
 export default function Addresses() {
 
@@ -28,7 +28,7 @@ export default function Addresses() {
         <GridItem colSpan={4}>
           <FormLabel htmlFor='addresses'>
             Addresses
-            <Tooltip label='Max 255 Addresses Allowed' fontSize='sm' rounded="md">
+            <Tooltip label='Max 200 Addresses Allowed' fontSize='sm' rounded="md">
               <InfoOutlineIcon ml="2"/>
             </Tooltip>
           </FormLabel>

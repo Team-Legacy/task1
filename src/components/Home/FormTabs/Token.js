@@ -19,11 +19,11 @@ export default function Token() {
           Token
           <Badge colorScheme="blue" ml="2" rounded="md" p="1">Contract (
             {
-              currentNetwork === 56 || currentNetwork ===97 ? "BNB"
+              currentNetwork === 1 || currentNetwork ===2 ? "BNB"
               :  
-              currentNetwork === 128 ? "HT"
+              currentNetwork === 3 ? "HT"
               :
-              currentNetwork === 1
+              currentNetwork === 4
               ? "ETH" : ""
             }
           {" "}Chain)</Badge>

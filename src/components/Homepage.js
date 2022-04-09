@@ -1,14 +1,13 @@
-import { InfoOutlineIcon } from '@chakra-ui/icons';
+// import { InfoOutlineIcon } from '@chakra-ui/icons';
 import HomeImage from "assets/undraw_nakamoto_-2-iv6 .svg";
-import SupportedNetworks from './Home/SupportedNetworks';
 
 import {
   Box,
     Button,
     Center,
     Flex,
-    FormControl,
-    FormLabel,
+    // FormControl,
+    // FormLabel,
     Grid,
     GridItem,
     Heading,
@@ -21,14 +20,14 @@ import {
     ModalHeader,
     ModalOverlay,
     Stack,
-    Switch,
+    // Switch,
     Tab,
     TabList,
     TabPanel,
     TabPanels,
     Tabs,
     Text,
-    Tooltip,
+    // Tooltip,
     useBreakpointValue,
     useColorModeValue,
     useDisclosure,
@@ -49,13 +48,13 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
     const toast = useToast()
 
     const { amount, tokenAddress, addresses, setAddresses, 
-        currentAccount, isPro, setIsPro, tabIndex, setTabIndex,
+        currentAccount, isPro, tabIndex, setTabIndex,
         currentNetwork
     } = useAuth()
 
-    const changePro = () => {
-        setIsPro(!isPro)
-    }
+    // const changePro = () => {
+    //     setIsPro(!isPro)
+    // }
 
     const confirm = () => {
         if(!currentAccount) {
@@ -121,7 +120,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
             setAddresses(convertStringAmountAddrToArr(addresses))
         }
         
-        if(currentNetwork !== 56 && currentNetwork !==97 && currentNetwork !== 128) {
+        if(currentNetwork !== 56 && currentNetwork !==97 && currentNetwork !== 4) {
             toast({
                 title: 'Unsupported Network detected!',
                 description: "Please switch to supported network.",
@@ -138,6 +137,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
     const handleTabChange = index => {
         setTabIndex(index)
     }
+    
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
@@ -201,8 +201,8 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
               <Tabs isFitted variant='unstyled' onChange={(index) => handleTabChange(index)}>
               <Grid templateColumns='repeat(5, 1fr)' gap={4}>
                 <GridItem colSpan={4}>
-                    <TabList  mx={4} mt="8" p={2} bg="brand.300" rounded="xl" w={{base:"92.5%", md:"60%"}} color="black">
-                    <Tab _selected={{ color: 'black', bg: 'brand.200' }} 
+                    <TabList  mx={4} mt="8" p={2} bg="green.700" rounded="xl" w={{base:"92.5%", md:"60%"}} color="black">
+                    <Tab _selected={{ color: 'black', bg: 'green.200' }} 
                         _focus={{ outline: "none" }} rounded="lg">
                         Send {
                         currentNetwork === 56 || currentNetwork ===97 ? "BNB"
@@ -212,13 +212,13 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                         currentNetwork === 1
                         ? "ETH" : ""}
                     </Tab>
-                    <Tab _selected={{ color: 'black', bg: 'brand.200' }}
+                    <Tab _selected={{ color: 'black', bg: 'green.200' }}
                         _focus={{ outline: "none" }} rounded="lg">
                         Send Tokens
                     </Tab>
                     </TabList>
                 </GridItem>
-                <GridItem colSpan={1}>
+                {/* <GridItem colSpan={1}>
                   <FormControl display='flex' alignItems='flex-end' justifyContent='flex-end' mt="8" pr="4">
                   <FormLabel htmlFor='pro' mb='0'>
                       PRO
@@ -229,7 +229,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                   </FormLabel>
                   <Switch id='pro' onChange={changePro}/>
                   </FormControl>
-                </GridItem>
+                </GridItem> */}
               </Grid>
               <TabPanels>
                 <TabPanel>
@@ -248,11 +248,11 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
               </TabPanels>
               </Tabs>
               <Center>
-                  <Button bg="brand.100" color="white" 
+                  <Button bg="green.700" color="white" 
                   size="lg"
                   my="20px"
                   _hover={{
-                      backgroundColor: "brand.200"
+                      backgroundColor: "green.600"
                   }}
                   onClick={confirm}
                   >
@@ -261,7 +261,6 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
               </Center>
             </Box>
           </Center>
-          <SupportedNetworks />
           </ModalBody>
 
           {/* <ModalFooter>

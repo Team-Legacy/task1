@@ -5,7 +5,10 @@ const providerOptions = {
 };
 
 const web3Modal = new Web3Modal({
-  providerOptions // required
+  providerOptions:{}, // required
+  network: "kovan", // optional
+  cacheProvider: true, // optional
+  disableInjectedProvider: false,
 });
 
 export default web3Modal;

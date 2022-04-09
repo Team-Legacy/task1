@@ -175,13 +175,13 @@ export default function CSVUpload() {
                 <p style={{color: "#2561ED"}}>
                   Drag the CSV file here to start uploading
                 </p>
-                <Button leftIcon={<BsFillCloudArrowUpFill size="25px"/>} bg="brand.200" 
+                <Button leftIcon={<BsFillCloudArrowUpFill size="25px"/>} bg="green.200" 
                 color="white" 
                 _hover={{
-                  backgroundColor: "brand.200"
+                  backgroundColor: "green.200"
                 }}
                 _focus={{
-                  backgroundColor: "brand.200",
+                  backgroundColor: "green.200",
                   outline: "none"
                 }}
                 mt="4">Browse Files</Button>

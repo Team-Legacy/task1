@@ -37,7 +37,8 @@ export default function Amounts() {
     return () => {
       isConnected = true;
     }
-  }, [getBalance])
+  }, [getBalance]);
+  
   return (
     <>
     <FormControl mt="4">
@@ -47,11 +48,11 @@ export default function Amounts() {
           type='number' color="black" w={{base:'100%', md:"60%"}} backgroundColor="#E5E5E5" placeholder='10' isRequired/>
           {tabIndex === 0 ?
           <InputRightAddon children={
-            currentNetwork === 56 || currentNetwork ===97 ? "BNB"
+            currentNetwork === 1 || currentNetwork ===2 ? "BNB"
             :  
-            currentNetwork === 128 ? "HT"
+            currentNetwork === 3 ? "HT"
             :
-            currentNetwork === 1
+            currentNetwork === 4
             ? "ETH" : ""} />
           :
           <></>
@@ -60,11 +61,11 @@ export default function Amounts() {
         </InputGroup>
         {tabIndex===0 ?
           <FormHelperText>Wallet Balance: {balance ? balance : "0"} {
-            currentNetwork === 56 || currentNetwork ===97 ? "BNB"
+            currentNetwork === 1 || currentNetwork ===2 ? "BNB"
             :  
-            currentNetwork === 128 ? "HT"
+            currentNetwork === 3 ? "HT"
             :
-            currentNetwork === 1
+            currentNetwork === 4
             ? "ETH" : ""}</FormHelperText>
           : 
           <></>
