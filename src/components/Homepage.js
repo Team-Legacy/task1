@@ -121,16 +121,16 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
             setAddresses(convertStringAmountAddrToArr(addresses))
         }
         
-        if(currentNetwork !== 56 && currentNetwork !==97 && currentNetwork !== 128) {
-            toast({
-                title: 'Unsupported Network detected!',
-                description: "Please switch to supported network.",
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-            })
-            return;
-        }
+        // if(currentNetwork !== 56 && currentNetwork !==97 && currentNetwork !== 128) {
+        //     toast({
+        //         title: 'Unsupported Network detected!',
+        //         description: "Please switch to supported network.",
+        //         status: 'error',
+        //         duration: 3000,
+        //         isClosable: true,
+        //     })
+        //     return;
+        // }
 
         navigate("/confirm", { replace: false })
     }
