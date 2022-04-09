@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <React.Fragment >
-      {currentNetwork === 56 || currentNetwork ===97 || currentNetwork === 128 
+      {/* {currentNetwork === 41 
       ?
       <></>
       :
@@ -31,7 +31,7 @@ export default function Navbar() {
         <AlertTitle mr={2}>Current Network not supported!</AlertTitle> 
         <AlertDescription>Please switch to supported networks.</AlertDescription>
       </Alert>
-      }
+      } */}
       
       <chakra.header
         bg={bg}
@@ -51,7 +51,7 @@ export default function Navbar() {
             >
               <Image src={Logo} h="30px"/>
               <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-                LEGAC
+                NESTCOIN
               </chakra.h1>
             </chakra.a>
           </Flex>

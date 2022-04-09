@@ -121,16 +121,16 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
             setAddresses(convertStringAmountAddrToArr(addresses))
         }
         
-        if(currentNetwork !== 56 && currentNetwork !==97 && currentNetwork !== 128) {
-            toast({
-                title: 'Unsupported Network detected!',
-                description: "Please switch to supported network.",
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-            })
-            return;
-        }
+        // if(currentNetwork !== 41 && currentNetwork !==97 && currentNetwork !== 128) {
+        //     toast({
+        //         title: 'Unsupported Network detected!',
+        //         description: "Please switch to supported network.",
+        //         status: 'error',
+        //         duration: 3000,
+        //         isClosable: true,
+        //     })
+        //     return;
+        // }
 
         navigate("/confirm", { replace: false })
     }
@@ -177,7 +177,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                 backgroundColor: "green.600"
               }}
             >
-                Claim Reward
+                Airdrop
               </Button>
               {/* <Button rounded={'full'} onClick={onOpen}>How It Works</Button> */}
             </Stack>
@@ -204,25 +204,15 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                     <TabList  mx={4} mt="8" p={2} bg="brand.300" rounded="xl" w={{base:"92.5%", md:"60%"}} color="black">
                     <Tab _selected={{ color: 'black', bg: 'brand.200' }} 
                         _focus={{ outline: "none" }} rounded="lg">
-                        Send {
-                        currentNetwork === 56 || currentNetwork ===97 ? "BNB"
-                        :  
-                        currentNetwork === 128 ? "HT"
-                        :
-                        currentNetwork === 1
-                        ? "ETH" : ""}
-                    </Tab>
-                    <Tab _selected={{ color: 'black', bg: 'brand.200' }}
-                        _focus={{ outline: "none" }} rounded="lg">
-                        Send Tokens
+                        NestCoin Token 
                     </Tab>
                     </TabList>
                 </GridItem>
                 <GridItem colSpan={1}>
                   <FormControl display='flex' alignItems='flex-end' justifyContent='flex-end' mt="8" pr="4">
                   <FormLabel htmlFor='pro' mb='0'>
-                      PRO
-                      <Tooltip label='In Pro Mode, you can set different amounts of token to be sent to each address' 
+                      Multi Value
+                      <Tooltip label='In Multi Value Mode, you can set different amounts of token to be sent to each address' 
                       fontSize='sm' rounded="md">
                           <InfoOutlineIcon ml="2"/>
                       </Tooltip>
