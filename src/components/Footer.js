@@ -58,11 +58,11 @@ export default function Footer() {
           >
             <Image src={Logo} h="30px"/>
             <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-              LEGAC
+              NestCoin
             </chakra.h1>
           </chakra.a>
         </Flex>
-        <Text>© 2022 LEGAC. All rights reserved</Text>
+        <Text>© 2022 NestCoin @ LEGAC. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Twitter'} href={'#'}>
             <FaTwitter />
