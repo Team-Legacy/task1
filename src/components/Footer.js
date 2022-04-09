@@ -62,28 +62,31 @@ export default function Footer() {
             </chakra.h1>
           </chakra.a>
         </Flex>
+       
         <Text>© 2022 NestCoin @ LEGAC. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
-          <SocialButton label={'Twitter'} href={'#'}>
+          <SocialButton label={'Twitter'} href={'https://twitter.com/nestcoin'}>
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={'YouTube'} href={'#'} _hover={{
+          {/* <SocialButton label={'YouTube'} href={'#'} _hover={{
                 color: "green.600"
               }}>
             <FaYoutube _hover={{
                 color: "green.600"
               }}/>
-          </SocialButton>
-          <SocialButton label={'Instagram'} href={'#'}>
+          </SocialButton> */}
+          <SocialButton label={'Instagram'} href={'https://instagram.com/nestcoin'}>
             <FaInstagram />
           </SocialButton>
-          <SocialButton label={'Discord'} href={'#'}>
+          {/* <SocialButton label={'Discord'} href={'#'}>
             <FaDiscord />
           </SocialButton>
           <SocialButton label={'Telegram'} href={'#'}>
             <FaTelegramPlane />
-          </SocialButton>
+          </SocialButton> */}
         </Stack>
+
+        
       </Container>
     </Box>
   );
