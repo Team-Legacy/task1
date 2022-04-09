@@ -20,12 +20,16 @@ export default function Amounts() {
       //gets the account
       const signer = provider.getSigner(); 
       setBalance(ethers.utils.formatEther(await signer.getBalance("latest")));
+
+
+
     } catch(err) {
       console.log(err)
     }
   }, [currentAccount, setBalance])
 
   const handleChange = (e) => {
+    console.log(e.target.value);
     setAmount(e.target.value)
   }
 
@@ -45,26 +49,12 @@ export default function Amounts() {
         <InputGroup>
           <Input id='amount' _placeholder={{color: "gray.500"}} onChange={handleChange}
           type='number' color="black" w={{base:'100%', md:"60%"}} backgroundColor="#E5E5E5" placeholder='10' isRequired/>
-          {tabIndex === 0 ?
-          <InputRightAddon children={
-            currentNetwork === 56 || currentNetwork ===97 ? "BNB"
-            :  
-            currentNetwork === 128 ? "HT"
-            :
-            currentNetwork === 1
-            ? "ETH" : ""} />
-          :
-          <></>
-          }
+          
           
         </InputGroup>
         {tabIndex===0 ?
           <FormHelperText>Wallet Balance: {balance ? balance : "0"} {
-            currentNetwork === 56 || currentNetwork ===97 ? "BNB"
-            :  
-            currentNetwork === 128 ? "HT"
-            :
-            currentNetwork === 1
+            currentNetwork === 41
             ? "ETH" : ""}</FormHelperText>
           : 
           <></>

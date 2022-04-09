@@ -167,7 +167,7 @@ export default function MainTabs() {
                     _focus={{ outline: "none" }}
                     rounded="lg"
                   >
-                    Send {}
+                    Send
                   </Tab>
                   <Tab
                     _selected={{ color: "black", bg: "brand.200" }}

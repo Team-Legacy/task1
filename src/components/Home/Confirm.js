@@ -19,8 +19,8 @@ export default function Confirm() {
 
     const bg = useColorModeValue("#E5E5E5", "gray.800");
     let navigate = useNavigate();
-    const toast = useToast()
-    const toastID = 'toast'
+    const toast = useToast();
+    const toastID = 'toast';
 
     const [ isLoading, setIsLoading ] = useState()
     const [ isApproved, setIsApproved ] = useState(false)
@@ -28,6 +28,7 @@ export default function Confirm() {
     const [ coinGas, setCoinGas ] = useState()
     const [ contractGas, setContractGas ] = useState()
     const [ isSent, setIsSent ] = useState(false)
+    const [ currentPrice, setCurrentPrice ] = useState()
 
     const { currentAccount, addresses, tokenAddress, amount, isPro, setIsPro, 
         setAmount, setTokenAddress, setAddresses, contractAddr, currentNetwork,
@@ -67,6 +68,7 @@ export default function Confirm() {
     }, [addresses])
 
     const getContractGasPrice = useCallback(async() => {
+        
         try {
             const { ethereum } = window; //injected by metamask
             //connect to an ethereum node
@@ -74,40 +76,19 @@ export default function Confirm() {
             //gets the account
             const signer = provider.getSigner(); 
             let _currentPrice;
-            provider.getGasPrice().then((currentPrice)=> {
-                _currentPrice = ethers.utils.formatUnits(currentPrice, "gwei")
+            provider.getGasPrice().then((currentprice)=> {
+                _currentPrice = ethers.utils.formatUnits(currentprice, "gwei");
+                console.log(_currentPrice);
+                 setCurrentPrice(_currentPrice);
+
             })
+            console.log(currentPrice);
+            //const bulkSender= new ethers.Contract(contractAddr, bulkSender_abi , signer);
             const bulkSender= new ethers.Contract(contractAddr, bulkSender_abi , signer);
-            
             console.log({contractAddr});
             let estimation;
             if(isPro) {
-                // if(tabIndex===1) {
-                //     let _amountArr = []
-                //     let _addressArr = []
-                //     for(let i=0; i<addresses.length; i++) {
-                //         _amountArr.push(ethers.utils.parseEther(addresses[i][1]))
-                //         _addressArr.push(addresses[i][0])
-                //     }
-                //     try {
-                //         estimation = await bulkSender.estimateGas.AirdropDifferentValue(tokenAddress, _addressArr, _amountArr)
-                //         setContractGas(parseInt(estimation["_hex"], 16)*_currentPrice)
-                //     } catch(err) {
-                //         console.log(err)
-                //     }
-                // // } else {
-                //     const options = {value: ethers.utils.parseEther((amount).toString())}
-                //     let _amountArr = []
-                //     let _addressArr = []
-                //     for(let i=0; i<addresses.length; i++) {
-                //         _amountArr.push(ethers.utils.parseEther(addresses[i][1]))
-                //         _addressArr.push(addresses[i][0])
-                //     }
-                    // estimation = await bulkSender.estimateGas.ethSendDifferentValue(_addressArr, _amountArr, options)
-                    // setContractGas(parseInt(estimation["_hex"], 16)*_currentPrice)
-                // }
-
-              // send without table index
+                console.log("First method");
                 let _amountArr = []
                 let _addressArr = []
                 for(let i=0; i<addresses.length; i++) {
@@ -115,33 +96,25 @@ export default function Confirm() {
                     _addressArr.push(addresses[i][0])
                 }
                 try {
-                    estimation = await bulkSender.estimateGas.AirdropDifferentValue(tokenAddress, _addressArr, _amountArr)
-                    setContractGas(parseInt(estimation["_hex"], 16)*_currentPrice)
+                    console.log(_amountArr);
+                    console.log(_addressArr);
+                    console.log(_currentPrice);
+                    estimation = await bulkSender.estimateGas.AirdropDifferentValue( _addressArr, _amountArr)
+                    setContractGas(parseInt(estimation["_hex"], 16)*currentPrice)
                 } catch(err) {
                     console.log(err)
                 }
             } else {
-                // if(tabIndex===1) {
-                //     try {
-                //         estimation = await bulkSender.estimateGas.AirdropSameValue(tokenAddress, addresses, ethers.utils.parseEther((amount).toString()))
-                //         setContractGas(parseInt(estimation["_hex"], 16)*_currentPrice)
-                //     } catch(err) {
-                //         console.log(err)
-                //     }
-                // } else {
-                //     const options = {value: ethers.utils.parseEther((amount*addresses.length).toString())}
-                //     estimation = await bulkSender.estimateGas.ethSendSameValue(addresses, ethers.utils.parseEther((amount).toString()), options)
-                //     console.log(_currentPrice)
-                //     setContractGas(parseInt(estimation["_hex"], 16)*_currentPrice)
-                // }
-
+                console.log("second method");
                 try {
-                    estimation = await bulkSender.estimateGas.AirdropSameValue(tokenAddress, addresses, ethers.utils.parseEther((amount).toString()))
-                    setContractGas(parseInt(estimation["_hex"], 16)*_currentPrice)
+                    console.log(" amount ".amount);
+                    estimation = await bulkSender.estimateGas.AirdropSameValue(addresses, ethers.utils.parseEther((amount)).toString());
+                    setContractGas(parseInt(estimation["_hex"], 16)*currentPrice)
                 } catch(err) {
                     console.log(err)
                 }
             }
+            console.log("estimation".estimation);
             console.log(parseInt(estimation["_hex"], 16))
         } catch(err) {
             console.log(err)
@@ -149,14 +122,11 @@ export default function Confirm() {
     }, [addresses, amount, contractAddr, tokenAddress, isPro, tabIndex])
 
     useEffect(() => {
-        if(currentNetwork === 56 ) {
-            setContractAddr("0x83cC30e1E5f814883B260CE32A2a13D3493E5439")
-        } else if(currentNetwork === 128) {
-            setContractAddr("0xF104c1F8346F6BfF0565106B15e1bC989d10216d");
-        } else if(currentNetwork === 97) {
-            setContractAddr("0x4e7369474301364B6348F0660a87A6D5557e6F9f");
+        if(currentNetwork === 42 ) {//KOvan network we would set our contract address
+            setContractAddr("0x1828f6d9Bd8142599757d1550dfb10F17714336d")
+            setTokenAddress("0x0747cd400045Db476b12312E61AF9194CA629b84");
         } else setContractAddr()
-        if(tabIndex===0) {
+        if(tabIndex===1) {
             getCoinGasPrice()
             getContractGasPrice()
         }
@@ -176,6 +146,7 @@ export default function Confirm() {
     }
 
     const sendTx = async() => {
+        console.log("****************************************************");
         if(!currentAccount) {
             toast({
                 toastID,
@@ -210,6 +181,7 @@ export default function Confirm() {
             })
             return;
         }
+        console.log("I am here");
         setIsLoading(true)
         try {
             const { ethereum } = window; //injected by metamask
@@ -218,19 +190,30 @@ export default function Confirm() {
             //gets the account
             const signer = provider.getSigner(); 
             //connects with the contract
-            const bulkSenderContract = new ethers.Contract(contractAddr, bulkSender_abi, signer);
+            const bulkSenderContract= new ethers.Contract(contractAddr, bulkSender_abi , signer);
+            console.log(bulkSenderContract);
             if(isPro) {
+                
+                console.log(amount);
                 const options = {value: ethers.utils.parseEther((amount).toString())}
+                
+                console.log(options);
                 let _amountArr = []
                 let _addressArr = []
                 for(let i=0; i<addresses.length; i++) {
                     _amountArr.push(ethers.utils.parseEther(addresses[i][1]))
                     _addressArr.push(addresses[i][0])
                 }
-                await bulkSenderContract.AirdropDifferentValue(_addressArr, _amountArr, options)
+                console.log(_addressArr);
+                console.log(_amountArr);
+                console.log(options);
+                await bulkSenderContract.AirdropDifferentValue(_addressArr, _amountArr)
             } else {
+                console.log(amount);
                 const options = {value: ethers.utils.parseEther((amount*addresses.length).toString())}
-                await bulkSenderContract.AirdropSameValue(addresses, ethers.utils.parseEther((amount).toString()), options);
+                console.log((amount).toString());
+                console.log(addresses);
+                await bulkSenderContract.AirdropSameValue(addresses, (amount).toString());
             }
             setTimeout(() => {
                 setIsSent(true)
@@ -252,144 +235,6 @@ export default function Confirm() {
         }
     }
 
-    // const sendTokenTx = async() => {
-    //     setIsLoading(true)
-    //     if(!currentAccount) {
-    //         toast({
-    //             toastID,
-    //             title: 'No Account Found!',
-    //             description: "Please connect with your wallet.",
-    //             status: 'error',
-    //             duration: 3000,
-    //             isClosable: true,
-    //         })
-    //         return;
-    //     }
-    //     if(currentNetwork!==56 && currentNetwork!==128 && currentNetwork!==97) {
-    //         toast({
-    //             toastID,
-    //             title: 'Incorrect Network detected!',
-    //             description: "Please switch to supported networks.",
-    //             status: 'error',
-    //             duration: 3000,
-    //             isClosable: true,
-    //         })
-    //         return;
-    //     }
-        // if(!amount) {
-        //     toast({
-        //         toastID,
-        //         title: 'No amount detected',
-        //         description: "Please input correct values",
-        //         status: 'error',
-        //         duration: 3000,
-        //         isClosable: true,
-        //     })
-        //     return;
-        // }
-        // try {
-        //     const { ethereum } = window; //injected by metamask
-        //     //connect to an ethereum node
-        //     const provider = new ethers.providers.Web3Provider(ethereum); 
-        //     //gets the account
-        //     const signer = provider.getSigner(); 
-        //     //connects with the contract
-        //     const bulkSenderContract = new ethers.Contract(contractAddr, bulkSender, signer);
-        //     if(isPro) {
-        //         let _amountArr = []
-        //         let _addressArr = []
-        //         for(let i=0; i<addresses.length; i++) {
-        //             _amountArr.push(ethers.utils.parseEther(addresses[i][1]))
-        //             _addressArr.push(addresses[i][0])
-        //         }
-        //         await multisendContract.sendDifferentValue(tokenAddress, _addressArr, _amountArr)
-        //     } else {
-        //         await multisendContract.sendSameValue(tokenAddress, addresses, ethers.utils.parseEther((amount).toString()));
-        //     }
-        //     setTimeout(() => {
-        //         setIsSent(true)
-        //     }, 5000);
-        //     toast({
-        //         toastID,
-        //         title: 'Transaction Submitted',
-        //         description: "Please check explorer.",
-        //         status: 'success',
-        //         duration: 3000,
-        //         isClosable: true,
-        //     })
-        // } catch(err) {
-        //     console.log(err)
-        // } finally {
-        //     setTimeout(() => {
-        //         setIsLoading(false)
-        //     }, 5000);
-        // }
-    // }
-
-    // const approveTx = async() => {
-    //     setIsLoading(true)
-    //     if(!currentAccount) {
-    //         toast({
-    //             toastID,
-    //             title: 'No Account Found!',
-    //             description: "Please connect with your wallet.",
-    //             status: 'error',
-    //             duration: 3000,
-    //             isClosable: true,
-    //         })
-    //         return;
-    //     }
-        // if(currentNetwork!==56 && currentNetwork!==128 && currentNetwork!==97) {
-        //     toast({
-        //         toastID,
-        //         title: 'Incorrect Network detected!',
-        //         description: "Please switch to supported networks.",
-        //         status: 'error',
-        //         duration: 3000,
-        //         isClosable: true,
-        //     })
-        //     return;
-        // }
-        // if(!amount) {
-        //     toast({
-        //         toastID,
-        //         title: 'No amount detected',
-        //         description: "Please input correct values",
-        //         status: 'error',
-        //         duration: 3000,
-        //         isClosable: true,
-        //     })
-        //     return;
-        // }
-        // try {
-        //     const { ethereum } = window; //injected by metamask
-        //     //connect to an ethereum node
-        //     const provider = new ethers.providers.Web3Provider(ethereum); 
-        //     //gets the account
-        //     const signer = provider.getSigner(); 
-        //     //connects with the contract
-        //     const tokenContract = new ethers.Contract(tokenAddress, nestCoin_abi, signer);
-        //     const _amount = ethers.utils.parseEther((((addresses.length*10*amount)/10).toString()));
-        //     await tokenContract.approve(contractAddr, _amount);
-        //     setTimeout(() => {
-        //         setIsApproved(true)
-        //     }, 5000);
-        //     toast({
-        //         toastID,
-        //         title: 'Approval Request Submitted',
-        //         description: "Please check explorer.",
-        //         status: 'success',
-        //         duration: 3000,
-        //         isClosable: true,
-        //     })
-        // } catch(err) {
-        //     console.log(err)
-        // } finally {
-        //     setTimeout(() => {
-        //         setIsLoading(false)
-        //     }, 5000);
-        // }
-    // }
 
     return (
     <Center bg={bg} h="90vh">
@@ -418,7 +263,7 @@ export default function Confirm() {
                         Token Contract Address:
                     </Heading>
                     <chakra.h2>
-                        <Link href={"https://testnet.bscscan.com/address/"+tokenAddress} isExternal>
+                        <Link href={"https://kovan.etherscan.com/address/"+tokenAddress} isExternal>
                         {tokenAddress.substring(0, 5)+"..."+tokenAddress.substring(36, 42)}
                         </Link>
                         <ExternalLinkIcon ml="1"/>
@@ -471,14 +316,15 @@ export default function Confirm() {
                     </SimpleGrid>
                     <DonationBox />
                     {tokenAddress ?
-                    isApproved ?
+                    true ?
                     <Button bg="brand.100" color="white"
                     size="md"
                     _hover={{
                         backgroundColor: "brand.200"
                     }}
-                    onClick={sendTx}
+                    
                     isLoading={isLoading}
+                    onClick={sendTx}
                     >
                         SEND
                     </Button>
@@ -488,7 +334,7 @@ export default function Confirm() {
                     _hover={{
                         backgroundColor: "brand.200"
                     }}
-                    // onClick={approveTx}
+                     onClick={sendTx}
                     isLoading={isLoading}
                     >
                         SEND
@@ -506,10 +352,9 @@ export default function Confirm() {
                         SEND
                     </Button>
                     }
-                    {tabIndex === 1 ?
+                    {
                     <ApproveSend isApproved={isApproved} isSent={isSent}/>
-                    :
-                    <></>}
+                    }
                 </VStack>
             </Center>
         </Box>
