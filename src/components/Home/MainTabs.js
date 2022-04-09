@@ -2,7 +2,6 @@ import React from "react";
 import Amounts from "./FormTabs/Amounts";
 import Addresses from "./FormTabs/Addresses";
 import Token from "./FormTabs/Token";
-import SupportedNetworks from "./SupportedNetworks";
 
 import {
   Tabs,
@@ -167,7 +166,7 @@ export default function MainTabs() {
                     _focus={{ outline: "none" }}
                     rounded="lg"
                   >
-                    Send
+                    NestCoin - NCN
                   </Tab>
                   <Tab
                     _selected={{ color: "black", bg: "brand.200" }}
@@ -228,7 +227,6 @@ export default function MainTabs() {
           </Center>
         </Box>
       </Center>
-      <SupportedNetworks />
     </>
   );
 }

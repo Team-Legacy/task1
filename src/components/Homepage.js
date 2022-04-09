@@ -123,7 +123,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
             setAddresses(convertStringAmountAddrToArr(addresses))
         }
         
-        // if(currentNetwork !== 56 && currentNetwork !==97 && currentNetwork !== 128) {
+        // if(currentNetwork !== 41 && currentNetwork !==97 && currentNetwork !== 128) {
         //     toast({
         //         title: 'Unsupported Network detected!',
         //         description: "Please switch to supported network.",
@@ -207,7 +207,7 @@ import convertStringAddrToArr from 'utils/convertStringAddrToArr';
                     <TabList  mx={4} mt="8" p={2} bg="brand.300" rounded="xl" w={{base:"92.5%", md:"60%"}} color="black">
                     <Tab _selected={{ color: 'black', bg: 'brand.200' }} 
                         _focus={{ outline: "none" }} rounded="lg">
-                        Send 
+                        NestCoin Token 
                     </Tab>
                     </TabList>
                 </GridItem>

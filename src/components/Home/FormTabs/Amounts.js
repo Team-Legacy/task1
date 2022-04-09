@@ -8,40 +8,14 @@ import { useAuth } from 'contexts/AuthContext'
 
 export default function Amounts() {
 
-  const { currentAccount, setAmount, balance, 
-    setBalance, tabIndex, currentNetwork
-   } = useAuth();
-  const getBalance = useCallback(async() => {
-    if(!currentAccount) return;
-    try {
-      const { ethereum } = window; //injected by metamask
-      //connect to an ethereum node
-      const provider = new ethers.providers.Web3Provider(ethereum); 
-      //gets the account
-      const signer = provider.getSigner(); 
-      setBalance(ethers.utils.formatEther(await signer.getBalance("latest")));
-
-
-
-    } catch(err) {
-      console.log(err)
-    }
-  }, [currentAccount, setBalance])
+  const { setAmount} = useAuth();
+   
 
   const handleChange = (e) => {
     console.log(e.target.value);
     setAmount(e.target.value)
   }
 
-  useEffect(() => {
-    let isConnected = false;
-    if(!isConnected) {
-      getBalance()
-    }
-    return () => {
-      isConnected = true;
-    }
-  }, [getBalance])
   return (
     <>
     <FormControl mt="4">
@@ -52,13 +26,6 @@ export default function Amounts() {
           
           
         </InputGroup>
-        {tabIndex===0 ?
-          <FormHelperText>Wallet Balance: {balance ? balance : "0"} {
-            currentNetwork === 41
-            ? "ETH" : ""}</FormHelperText>
-          : 
-          <></>
-        }
     </FormControl>
     </>
   )

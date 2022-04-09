@@ -63,6 +63,7 @@ export default function Footer() {
           </chakra.a>
         </Flex>
        
+        <Text>© 2022 NestCoin @ LEGAC. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Twitter'} href={'https://twitter.com/nestcoin'}>
             <FaTwitter />

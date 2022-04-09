@@ -12,7 +12,6 @@ import { ethers } from 'ethers';
 
 import bulkSender_abi from "abi/bulkSender.json"
 import nestCoin_abi from "abi/nestCoin.json"
-import DonationBox from './Confirm/DonationBox';
 import ApproveSend from './Confirm/ApproveSend';
 
 export default function Confirm() {
@@ -201,19 +200,19 @@ export default function Confirm() {
                 let _amountArr = []
                 let _addressArr = []
                 for(let i=0; i<addresses.length; i++) {
-                    _amountArr.push(ethers.utils.parseEther(addresses[i][1]))
-                    _addressArr.push(addresses[i][0])
+                    _amountArr.push(ethers.utils.parseEther(addresses[i][1]));
+                    _addressArr.push(ethers.utils.getAddress(addresses[i][0]));
                 }
                 console.log(_addressArr);
                 console.log(_amountArr);
                 console.log(options);
-                await bulkSenderContract.AirdropDifferentValue(_addressArr, _amountArr)
+                await bulkSenderContract.AirdropDifferentValue(_addressArr, _amountArr,options)
             } else {
                 console.log(amount);
                 const options = {value: ethers.utils.parseEther((amount*addresses.length).toString())}
                 console.log((amount).toString());
                 console.log(addresses);
-                await bulkSenderContract.AirdropSameValue(addresses, (amount).toString());
+                await bulkSenderContract.AirdropSameValue(addresses, ethers.utils.parseEther((amount).toString()));
             }
             setTimeout(() => {
                 setIsSent(true)
@@ -227,6 +226,14 @@ export default function Confirm() {
                 isClosable: true,
             })
         } catch(err) {
+            toast({
+                toastID,
+                title: 'UnAuthorized',
+                description: "You are not Authorized to perform this operation.",
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
             console.log(err)
         } finally {
             setTimeout(() => {
@@ -294,7 +301,7 @@ export default function Confirm() {
                         <></>
                         :
                         <>
-                            <Box rounded="xl" bg='brand.200' height='80px' p="4">
+                            {/* <Box rounded="xl" bg='brand.200' height='80px' p="4">
                                 <Center>
                                 Est. Total Transaction Cost
                                 </Center>
@@ -309,12 +316,11 @@ export default function Confirm() {
                                 <Center>
                                     {contractGas ? Math.round(((coinGas-contractGas)/coinGas)*100)+" %" : ""}
                                 </Center>
-                            </Box>
+                            </Box> */}
                         </>
                         }
                         
                     </SimpleGrid>
-                    <DonationBox />
                     {tokenAddress ?
                     true ?
                     <Button bg="brand.100" color="white"
@@ -352,9 +358,9 @@ export default function Confirm() {
                         SEND
                     </Button>
                     }
-                    {
+                    {/* {
                     <ApproveSend isApproved={isApproved} isSent={isSent}/>
-                    }
+                    } */}
                 </VStack>
             </Center>
         </Box>
